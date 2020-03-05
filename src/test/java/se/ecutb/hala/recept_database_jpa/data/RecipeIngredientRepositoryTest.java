@@ -21,15 +21,12 @@ public class RecipeIngredientRepositoryTest {
 
     private RecipeIngredient recipeIngredient1;
     private RecipeIngredient recipeIngredient2;
-    private Ingredient potato;
-    private Ingredient pasta;
+
 
     @BeforeEach
     void setUp() {
-        pasta = new Ingredient("Pasta");
-        potato = new Ingredient("Potato");
-        recipeIngredient1 = new RecipeIngredient(potato,1, Measurement.KG,new Recipe());
-        recipeIngredient2 = new RecipeIngredient(pasta,500,Measurement.G,new Recipe());
+        recipeIngredient1 = new RecipeIngredient(new Ingredient("Potato"),1, Measurement.KG,new Recipe());
+        recipeIngredient2 = new RecipeIngredient(new Ingredient("Pasta"),500,Measurement.G,new Recipe());
         testObject.save(recipeIngredient1);
         testObject.save(recipeIngredient2);
     }
