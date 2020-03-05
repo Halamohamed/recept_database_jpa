@@ -11,7 +11,7 @@ public interface RecipeRepository extends CrudRepository<Recipe,Integer> {
     List<Recipe> findByRecipeNameContainsIgnoreCase(String recipeName);
 
     //Hitta alla recept som innehåller ett visst ingrediensnamn.
-    List<Recipe> findByRecipeIngredientsIngredientIngredientName(String ingredintName);
+    List<Recipe> findByRecipeIngredientsIngredientIngredientName(String ingredientName);
 
     //Hitta alla recept som tillhör en viss receptkategori.
     List<Recipe> findByCategoriesCategoryIgnoreCase(String category);
