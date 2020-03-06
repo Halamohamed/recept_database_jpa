@@ -17,5 +17,5 @@ public interface RecipeRepository extends CrudRepository<Recipe,Integer> {
     List<Recipe> findByCategoriesCategoryIgnoreCase(String category);
 
     //Hitta alla recept som har en eller flera träffar från en samling kategorier.
-    //List<Recipe> findByCategoriesCategory(List<String> category);
+    List<Recipe> findByCategoriesCategoryIn(List<String> category);
 }
