@@ -17,13 +17,12 @@ public class CommandLine implements CommandLineRunner {
 
     private CreateIngredientService ingredientService;
     private CreateRecipeService recipeService;
-    private EntityManager em;
+
 
     @Autowired
-    public CommandLine(CreateIngredientService ingredientService, CreateRecipeService recipeService, EntityManager em) {
+    public CommandLine(CreateIngredientService ingredientService, CreateRecipeService recipeService) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
-        this.em = em;
     }
 
     @Override
@@ -32,9 +31,6 @@ public class CommandLine implements CommandLineRunner {
 
         List<RecipeIngredient> recipeIngredients = new ArrayList<>();
         List<Recipe> mainRecipes = new ArrayList<>();
-        /*List<Recipe> vegetableRecipes = new ArrayList<>();
-        List<Recipe> dessertRecipes = new ArrayList<>();*/
-
         List<RecipeCategory> categories = new ArrayList<>();
 
         RecipeInstruction instruction = new RecipeInstruction("Cut the whole chickens into 4 breasts, 4 thighs, 4 legs and 4 wings and set aside. Preheat your oil, " +
@@ -45,27 +41,15 @@ public class CommandLine implements CommandLineRunner {
         RecipeCategory mainDishes = new RecipeCategory("Main Dishes",mainRecipes);
 
 
-
-
-
-
         Ingredient ingredient1 = new Ingredient("chicken");
 
 
-        /*
-        Recipe chicken =new Recipe("fried chicken",recipeIngredients,instruction,categories);
-        mainRecipes.add(chicken);
-        categories.add(mainDishes);
-        categories.add(dessert);
-        */
+
         RecipeIngredient recipeIngredient1 = new RecipeIngredient(ingredient1,500, Measurement.G,null);
 
 
         recipeIngredients.add(recipeIngredient1);
 
-
-        //recipeIngredients.forEach(em::persist);
-        //em.persist(instruction);
 
         //System.out.println(ingredientService.createAndSave("chicken"));
 

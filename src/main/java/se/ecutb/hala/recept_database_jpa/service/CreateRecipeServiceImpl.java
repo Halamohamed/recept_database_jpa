@@ -25,17 +25,11 @@ public class CreateRecipeServiceImpl implements CreateRecipeService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public Recipe createAndSave(String recipeName, List<RecipeIngredient> recipeIngredients, RecipeInstruction instruction, List<RecipeCategory> categories) {
-        Recipe recipe = recipeRepository.save(new Recipe(recipeName, recipeIngredients, instruction, categories));
 
-        if(hasNull(recipeName,recipeIngredients,instruction,categories)){
+        if(hasNull(recipeName,recipeIngredients)){
             throw new RuntimeException("One or more parameter is null");
         }
-        /*
-        if(recipeRepository.findByRecipeNameContainsIgnoreCase(recipeName).stream().findFirst().isPresent()){
-            throw new RuntimeException("This recipe name is already exist");
-        }
-        */
-
+        Recipe recipe = recipeRepository.save(new Recipe(recipeName, recipeIngredients, instruction, categories));
 
         return recipe;
     }
