@@ -34,6 +34,7 @@ public class CommandLine implements CommandLineRunner {
     }
 
     @Override
+    @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
         addIngredient();
         addRecipeIngredient();
@@ -46,11 +47,11 @@ public class CommandLine implements CommandLineRunner {
     public void addRecipeIngredient(){
         Ingredient ingredient1 = new Ingredient("chicken");
         RecipeIngredient recipeIngredient1 = new RecipeIngredient(ingredient1,500, Measurement.G,null);
-        recipeIngredients.add(recipeIngredient1);
+        System.out.println(recipeIngredients.add(recipeIngredient1));
     }
     public void addInstruction(){
         String instruction = "test instruction";
-        instructionService.createAndSave(instruction);
+        System.out.println(instructionService.createAndSave(instruction));
     }
 
     public void addRecipe(){
@@ -59,7 +60,7 @@ public class CommandLine implements CommandLineRunner {
                 "in either a heavy pan on the stove or a deep-fryer, to 325 degrees F. In a large bowl, combine the flour, salt, black pepper, garlic powder," +
                 " onion powder and cayenne pepper until thoroughly mixed");
 
-        recipeService.createAndSave(recipeName,recipeIngredients,instruction,categories);
+        System.out.println(recipeService.createAndSave(recipeName,recipeIngredients,instruction,categories));
     }
     public void addIngredient(){
         String ingredientName = "onion";
@@ -68,7 +69,7 @@ public class CommandLine implements CommandLineRunner {
     public void addRecipeCategory(){
         String category = "Main Dishes";
         RecipeCategory mainDishes = new RecipeCategory(category,mainRecipes);
-        categoryService.createAndSave(category,mainRecipes);
+        System.out.println(categoryService.createAndSave(category,mainRecipes));
 
     }
 }
