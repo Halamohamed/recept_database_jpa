@@ -3,6 +3,7 @@ package se.ecutb.hala.recept_database_jpa.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class RecipeIngredient {
@@ -12,6 +13,7 @@ public class RecipeIngredient {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
+    @Column(updatable = false, nullable = false)
     private String recipeIngredientId;
 
     @ManyToOne(
@@ -76,6 +78,22 @@ public class RecipeIngredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RecipeIngredient that = (RecipeIngredient) o;
+        return Double.compare(that.amount, amount) == 0 &&
+                Objects.equals(recipeIngredientId, that.recipeIngredientId) &&
+                Objects.equals(ingredient, that.ingredient) &&
+                measurement == that.measurement;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(recipeIngredientId, ingredient, amount, measurement);
     }
 
     @Override

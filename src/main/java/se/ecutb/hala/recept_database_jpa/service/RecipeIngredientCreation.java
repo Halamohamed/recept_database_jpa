@@ -27,8 +27,8 @@ public class RecipeIngredientCreation implements RecipeIngredientService {
         if (hasNull(ingredient,amount,measurement)){
           throw new RuntimeException("one or more parameter is null");
         }
-        RecipeIngredient recipeIngredient = ingredientRepository.save(new RecipeIngredient(ingredient,amount,measurement,recipe));
+        RecipeIngredient recipeIngredient = new RecipeIngredient(ingredient,amount,measurement,recipe);
 
-        return recipeIngredient;
+        return ingredientRepository.save(recipeIngredient);
     }
 }
