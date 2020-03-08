@@ -22,6 +22,7 @@ public class CommandLine implements CommandLineRunner {
     List<RecipeIngredient> recipeIngredients = new ArrayList<>();
     List<Recipe> mainRecipes = new ArrayList<>();
     List<RecipeCategory> categories = new ArrayList<>();
+    Recipe recipe ;
 
 
     @Autowired
@@ -36,10 +37,15 @@ public class CommandLine implements CommandLineRunner {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void run(String... args) throws Exception {
+        //add ingredient
         addIngredient();
+        //add recipe ingredient
         addRecipeIngredient();
+        //add recipe category
         addRecipeCategory();
+        //add instruction
         addInstruction();
+        //add recipe
         addRecipe();
 
     }
@@ -47,7 +53,8 @@ public class CommandLine implements CommandLineRunner {
     public void addRecipeIngredient(){
         Ingredient ingredient1 = new Ingredient("chicken");
         RecipeIngredient recipeIngredient1 = new RecipeIngredient(ingredient1,500, Measurement.G,null);
-        System.out.println(recipeIngredients.add(recipeIngredient1));
+        recipeIngredients.add(recipeIngredient1);
+        recipeIngredientService.createAndSave(ingredient1,3,Measurement.KG,recipe);
     }
     public void addInstruction(){
         String instruction = "test instruction";
@@ -59,8 +66,9 @@ public class CommandLine implements CommandLineRunner {
         RecipeInstruction instruction = new RecipeInstruction("Cut the whole chickens into 4 breasts, 4 thighs, 4 legs and 4 wings and set aside. Preheat your oil, " +
                 "in either a heavy pan on the stove or a deep-fryer, to 325 degrees F. In a large bowl, combine the flour, salt, black pepper, garlic powder," +
                 " onion powder and cayenne pepper until thoroughly mixed");
+        recipe = recipeService.createAndSave(recipeName,recipeIngredients,instruction,categories);
 
-        System.out.println(recipeService.createAndSave(recipeName,recipeIngredients,instruction,categories));
+        System.out.println(recipe);
     }
     public void addIngredient(){
         String ingredientName = "onion";
