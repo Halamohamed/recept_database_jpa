@@ -12,6 +12,7 @@ import java.util.Objects;
 @Service
 public class CreateIngredientServiceImpl implements CreateIngredientService {
 
+
     private IngredientRepository ingredientRepository;
 
     @Autowired
@@ -20,7 +21,7 @@ public class CreateIngredientServiceImpl implements CreateIngredientService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public Ingredient createAndSave(String ingredientName) {
         if(hasNull(ingredientName)){
             throw new RuntimeException("Ingredient name is null");
@@ -28,7 +29,8 @@ public class CreateIngredientServiceImpl implements CreateIngredientService {
         if(ingredientRepository.findByIngredientNameIgnoreCase(ingredientName).isPresent()){
             throw new RuntimeException("Ingredient name is already exist");
         }
-        return ingredientRepository.save(new Ingredient(ingredientName));
+        Ingredient ingredient = new Ingredient(ingredientName);
+        return ingredientRepository.save(ingredient);
     }
 
     public static boolean hasNull(Object... objects) {

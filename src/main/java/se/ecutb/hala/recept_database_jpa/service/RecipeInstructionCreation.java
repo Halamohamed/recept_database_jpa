@@ -19,7 +19,7 @@ public class RecipeInstructionCreation implements RecipeInstructionService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public RecipeInstruction createAndSave(String instruction) {
         if(hasNull(instruction)){
             throw new RuntimeException("Instruction can not be null");

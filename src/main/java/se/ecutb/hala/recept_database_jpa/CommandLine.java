@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import se.ecutb.hala.recept_database_jpa.entity.*;
 import se.ecutb.hala.recept_database_jpa.service.*;
 
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,12 +1,11 @@
 package se.ecutb.hala.recept_database_jpa.data;
 
-import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import se.ecutb.hala.recept_database_jpa.entity.Ingredient;
-
 
 import java.util.ArrayList;
 import java.util.List;
